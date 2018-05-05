@@ -10,11 +10,14 @@ eg: M1: ([0,0,0], [0,1,0], [1,1,0])  M2([0,1,1], [0,1,1], [0,0,0]);
 """
 
 import numpy as np
+import time
 
 #1. input matrix and reshape
-m1, m2 = np.array([[0,0,0], [0,1,0], [1,1,0]]), np.array([[0,1,1], [0,1,1], [0,0,0]])
+#m1, m2 = np.array([[0,0,0], [0,1,0], [1,1,0]]), np.array([[0,1,1], [0,1,1], [0,0,0]])
 #m1, m2 = np.array([[0,0,0,1], [0,1,0,0], [1,1,0,0]]), np.array([[0,1,0,1], [0,1,1,0], [0,0,0,0]])
-#m1, m2 = np.random.binomial(1, 0.5, size = [20, 20]), np.random.binomial(1, 0.3, size = [20, 20])
+#m1, m2 = np.random.binomial(1, 0.5, size = [10, 10]), np.random.binomial(1, 0.3, size = [10, 10])
+#m1, m2 = np.random.binomial(1, 0.5, size = [50, 50]), np.random.binomial(1, 0.3, size = [50, 50])
+m1, m2 = np.random.binomial(1, 0.5, size = [100, 100]), np.random.binomial(1, 0.3, size = [100, 100])
 
 def move(m1, m2):
     shape = m1.shape
@@ -84,5 +87,9 @@ def move(m1, m2):
     print(origm)
     return pathway
 
+starttime = time.time()
 pathway = move(m1,m2)
+endtime = time.time()
+
+print(endtime - starttime)
     
