@@ -8,5 +8,4 @@ the second matrix in the two matrixs matches most?
 eg: M1: ([0,0,0], [0,1,0], [1,1,0])  M2([0,1,1], [0,1,1], [0,0,0])
 
 + [Answer(On going)](https://github.com/Wan-Yifei/Python-questions/blob/master/move%20the%20matrix.py)
-
 + [Answer(completed)](https://github.com/Wan-Yifei/Python-questions/blob/pathway/move%20the%20matrix.py)
