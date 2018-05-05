@@ -13,16 +13,18 @@ import numpy as np
 import time
 
 #1. input matrix and reshape
-#m1, m2 = np.array([[0,0,0], [0,1,0], [1,1,0]]), np.array([[0,1,1], [0,1,1], [0,0,0]])
-#m1, m2 = np.array([[0,0,0,1], [0,1,0,0], [1,1,0,0]]), np.array([[0,1,0,1], [0,1,1,0], [0,0,0,0]])
+m1, m2 = np.array([[0,0,0], [0,1,0], [1,1,0]]), np.array([[0,1,1], [0,1,1], [0,0,0]])
+#m1, m2 = np.array([[0,0,0,1], [0,1,0,0], [1,1,0,0],[1,1,0,0]]), np.array([[0,1,0,1], [0,1,1,0], [0,0,0,0],[0,1,1,0]])
 #m1, m2 = np.random.binomial(1, 0.5, size = [10, 10]), np.random.binomial(1, 0.3, size = [10, 10])
 #m1, m2 = np.random.binomial(1, 0.5, size = [50, 50]), np.random.binomial(1, 0.3, size = [50, 50])
-m1, m2 = np.random.binomial(1, 0.5, size = [100, 100]), np.random.binomial(1, 0.3, size = [100, 100])
+#m1, m2 = np.random.binomial(1, 0.5, size = [100, 100]), np.random.binomial(1, 0.3, size = [100, 100])
 
 def move(m1, m2):
     shape = m1.shape
-    m1 = m1.reshape([m1.shape[0] * m1.shape[1], ])
-    m2 = m2.reshape(m2.shape[0] * m2.shape[1], )
+    tempm = m1
+    m1 = m1.reshape([m1.shape[0] * m1.shape[1], ], order = 'F')
+    print(m1)
+    m2 = m2.reshape(m2.shape[0] * m2.shape[1], order = 'F')
     
     #2. compare two matrix
     ind1 = list(np.where(m1 == 1))[0]           ## index of 1 in 1st matrix
@@ -35,7 +37,7 @@ def move(m1, m2):
     
     
     set1, set2 = set(ind1), set(ind2)
-    start = list(set1 - (set1 & set2))        ## index of start point in !st matrix
+    start = list(set1 - (set1 & set2))        ## index of start point in 1st matrix
     target = list(set2 - (set1 & set2))       ## index of final location
     start.sort()
     target.sort()
@@ -50,16 +52,15 @@ def move(m1, m2):
             m1[i] = m1[target[k]]
             m1[target[k]] = temp
             ## compute the pathway
-            dist = i - target[k]
-            if dist < 0:
-                vertical = abs(dist)//shape[1]
-                horizon = abs(dist)%shape[1]
-                pathway[i] = pathway.get(i, [vertical, horizon])
-            else:
-                vertical = -abs(dist)//shape[1]
-                horizon = -(abs(dist)%shape[1])
-                pathway[i] = pathway.get(i, [vertical, horizon])
-                
+            r_m1 = i//shape[1]
+            c_m1 = i%shape[1]
+            r_m2 = target[k]//shape[1]
+            c_m2 = target[k]%shape[1]
+            #print(c_m2,c_m1)
+            horizon = r_m2 - r_m1
+            vertical = c_m2 - c_m1
+            pathway[i] = pathway.get(i, [vertical, horizon])
+            
             k = k + 1
     except IndexError:
         print('length of start: %d and target: %d'%(len(start),len(target)))
@@ -73,7 +74,6 @@ def move(m1, m2):
     set1, set2 = set(ind1), set(ind2)
     check = len(set1 & set2)
     print(check == n)   
-    
     finalm = m1.reshape(shape, order = 'F')
     origm = m2.reshape(shape, order = 'F')
     
@@ -81,10 +81,16 @@ def move(m1, m2):
     
     print('Most match of 1 is %d'%(n))
     print('\n')
-    #print(m1f)
+    print('Original M1:')
+    print(tempm)
+    print('\n')
+    print('Afet Moving M1:')
+    print('\n')
     print(finalm)
     print('\n')
+    print('M2:')
     print(origm)
+
     return pathway
 
 starttime = time.time()
