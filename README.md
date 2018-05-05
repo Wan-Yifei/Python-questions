@@ -1,7 +1,7 @@
 # Python-questions
 Some interesting questions 
 
-#List
+## List
 ## Q1. Move elements of matrix
 You have two 1&0 matrixs, how to move tge first matrix (move up, down, left and right) so that
 the second matrix in the two matrixs matches most?
