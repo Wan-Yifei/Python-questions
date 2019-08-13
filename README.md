@@ -9,3 +9,7 @@ eg: M1: ([0,0,0], [0,1,0], [1,1,0])  M2([0,1,1], [0,1,1], [0,0,0])
 
 + [Answer(On going)](https://github.com/Wan-Yifei/Python-questions/blob/master/move%20the%20matrix.py)
 + [Answer(completed)](https://github.com/Wan-Yifei/Python-questions/blob/pathway/move%20the%20matrix.py)
+
+## Q2. Recursively Drawing a Tree
+
++ [Answer](https://github.com/Wan-Yifei/Python-questions/blob/master/Fractal_tree.py)
