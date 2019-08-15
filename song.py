@@ -31,3 +31,12 @@ class Song:
             if current in names:
                 return True
         return False
+
+first = Song("Hello")
+second = Song("Eye of the tiger")
+    
+first.next_song(second);
+second.next_song(first);
+
+
+print(first.is_repeating_playlist())
